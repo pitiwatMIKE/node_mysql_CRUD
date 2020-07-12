@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= data.pageName %></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        a,
+        a:focus,
+        a:hover {
+            color: #fff;
+        }
+
+        .main-container {
+            max-width: 42em;
+        }
+
+        .header {
+            margin-bottom: 2rem;
+        }
+
+        .header-brand {
+            margin-bottom: 0;
+        }
+
+        .nav-header .nav-link {
+            padding: .25rem 0;
+            font-weight: 700;
+            color: rgba(255, 255, 255, .5);
+            background-color: transparent;
+            border-bottom: 0.1rem solid transparent;
+        }
+
+        .nav-header .nav-link:hover,
+        .nav-header .nav-link:focus {
+            border-bottom-color: rgba(255, 255, 255, .25);
+        }
+
+        .nav-header .active {
+            color: #fff;
+            border-bottom-color: #fff;
+        }
+
+        .cover {
+            padding: 1.5rem;
+        }
+
+        .cover .btn-lg {
+            padding: .75rem 1.25rem;
+            font-weight: 700;
+        }
+
+        .footer {
+            color: rgba(255, 255, 255, .5);
+        }
+    </style>
+</head>
+
+<body class="text-center text-white bg-dark">
+    <div class="main-container d-flex flex-column h-100 p-3 mx-auto">
+
+        <div class="container mb-auto">
+            <div class="row">
+                <div class="col-md-2 mb-3 mb-md-auto h3 header-brand">App</div>
+                <div class="col-md-10" style="font-size: 1.1rem;">
+                    <ul class="btnli nav nav-header justify-content-center justify-content-md-end">
+                        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                        <li class="nav-item"><a class="nav-link ml-4" href="/register">Register</a></li>
+                        <li class="nav-item"><a class="nav-link ml-4" href="/showdata">Showdata</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="cover">
+            <form action="/insert" method="POST" id="form">
+                <h1 class="mb-5">Register</h1>
+                <% if(data.message) {%> 
+                <div class="alert alert-success" role="alert">
+                    <%= data.message %> 
+                  </div>
+                <% } %> 
+                <!-- username -->
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <span>Username</span>
+                        </div>
+                    </div>
+                    <input type="text" class="form-control" name="username" id="username">
+                </div>
+                <!-- password -->
+                <div class="input-group  mb-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <span>Password</span>
+                        </div>
+                    </div>
+                    <input type="text" class="form-control" name="password" id="password">
+                </div>
+                <!-- btn -->
+                <button type="submit" class="btn btn-light mr-3 mt-3" id="send">send</button>
+                <button type="reset" class="btn btn-light mr-3 mt-3">reset</button>
+            </form>
+        </div>
+
+        <footer class="footer mt-auto">
+            <p>
+                node_modules use
+                <a href="https://www.npmjs.com/package/express">express</a>
+                <a href="https://www.npmjs.com/package/mysql">mysql</a>
+                <a href="https://www.npmjs.com/package/body-parser">body-parser</a>
+                <a href="https://www.npmjs.com/package/ejs">ejs</a>
+            </p>
+        </footer>
+    </div>
+    <script>
+        window.onload = function () {
+            const title = document.querySelector('title').innerHTML;
+            const btn = document.querySelectorAll('.btnli >li >a');
+            btn.forEach((a) => {
+                if (a.innerHTML == title) {
+                    a.classList.add('active');
+                }
+            });
+
+            //send data form
+            const form = document.querySelector('#form');
+            form.addEventListener('submit',function(e){
+                const inputuser = document.querySelector('#username').value;
+                const password = document.querySelector('#password').value;
+                e.preventDefault();
+                if(inputuser == '' || password == ''){
+                    alert('กรุณาใส่ข้อมูลให้ครบ');
+                }else{
+                    form.submit();
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>
