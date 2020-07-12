@@ -2,8 +2,8 @@
 const host = 'localhost';
 const user = 'root';
 const pass = '';
-const dbname = 'dbmyproject';
-const table = 'users';
+const dbname = 'zzzz';
+const table = 'sssss';
 
 module.exports.host = host;
 module.exports.user = user;
